@@ -21,7 +21,7 @@ const handler = (req, res) => {
   const url = req.query.url;
   fetch(url)
     .then(result => {
-      res.status(status);
+      res.status(result.status);
       res.setHeader('Location', result.headers.get("Location"));
       res.send(result.body);
     })
