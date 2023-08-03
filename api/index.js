@@ -18,11 +18,7 @@ const allowCors = fn => async (req, res) => {
 }
 
 const handler = (req, res) => {
-  // TODO add checks for body.url
-  let url = 'https://api.github.com/users/github'
-  if (req.body && req.body.url) {
-    url = req.body.url
-  }
+  const url = req.query.url;
   fetch(url)
     .then(result => result.json())
     .then(json => res.send(json))
