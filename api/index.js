@@ -23,7 +23,7 @@ const handler = (req, res) => {
     .then(result => {
       res.status(status);
       res.setHeader('Location', result.headers.get("Location"));
-      res.send(result.body)
+      res.send(result.body);
     }
     .catch(e => {
       res.status(500);
