@@ -27,7 +27,7 @@ const handler = (req, res) => {
     })
     .catch(error => {
       res.status(500);
-      res.send({error});
+      res.send({error,message: error.message});
     })
 }
 
