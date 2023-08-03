@@ -25,9 +25,9 @@ const handler = (req, res) => {
       res.setHeader('Location', result.headers.get("Location"));
       res.send(result.body);
     })
-    .catch(e => {
+    .catch(error => {
       res.status(500);
-      res.send(e);
+      res.send({error});
     })
 }
 
