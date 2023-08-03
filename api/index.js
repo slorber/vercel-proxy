@@ -20,9 +20,15 @@ const allowCors = fn => async (req, res) => {
 const handler = (req, res) => {
   const url = req.query.url;
   fetch(url)
-    .then(result => result.json())
-    .then(json => res.send(json))
-    .catch(e => res.send(e))
+    .then(result => {
+      res.status(status);
+      res.setHeader('Location', result.headers.get("Location"));
+      res.send(result.body)
+    }
+    .catch(e => {
+      res.status(500);
+      res.send(e);
+    })
 }
 
 module.exports = allowCors(handler)
