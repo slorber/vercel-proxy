@@ -20,10 +20,10 @@ const allowCors = fn => async (req, res) => {
 const handler = (req, res) => {
   const url = req.query.url;
   fetch(url)
-    .then(result => {
+    .then(async (result) => {
       res.status(result.status);
       res.setHeader('Location', result.headers.get("Location"));
-      res.send(result.body);
+      res.send(await result.text());
     })
     .catch(error => {
       res.status(500);
