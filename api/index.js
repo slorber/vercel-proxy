@@ -22,10 +22,8 @@ const handler = (req, res) => {
   fetch(url)
     .then(async (result) => {
       res.status(result.status);
-      // Shitty way to communicate the final redirect url to the client without annoying CORS issues
-      if (result.redirected) {
-        res.setHeader('X-Final-Url', result.url);
-      }
+      // Shitty way to communicate the final url in case any redirect happens
+      res.setHeader('X-Final-Url', result.url);
       res.send(await result.text());
     })
     .catch(error => {
