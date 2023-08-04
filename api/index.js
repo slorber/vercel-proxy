@@ -19,7 +19,7 @@ const allowCors = fn => async (req, res) => {
 
 const handler = (req, res) => {
   const url = req.query.url;
-  fetch(url)
+  fetch(url, {follow: 0})
     .then(async (result) => {
       res.status(result.status);
       res.setHeader('Location', result.headers.get("Location"));
