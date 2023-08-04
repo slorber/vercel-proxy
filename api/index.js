@@ -22,7 +22,9 @@ const handler = (req, res) => {
   fetch(url,{redirect: "manual"})
     .then(async (result) => {
       res.status(result.status);
-      res.setHeader('Location', result.headers.get("Location"));
+      if (result.redirected) {
+        res.setHeader('Location', result.headers.get("Location"));
+      }
       res.send(await result.text());
     })
     .catch(error => {
