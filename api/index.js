@@ -19,10 +19,13 @@ const allowCors = fn => async (req, res) => {
 
 const handler = (req, res) => {
   const url = req.query.url;
-  fetch(url,{redirect: "manual"})
+  fetch(url)
     .then(async (result) => {
       res.status(result.status);
-      res.setHeader('Location', result.headers.get("Location"));
+      // Shitty way to communicate the final redirect url to the client without annoying CORS issues
+      if (result.redirected) {
+        res.setHeader('X-Final-Url', result.url);
+      }
       res.send(await result.text());
     })
     .catch(error => {
